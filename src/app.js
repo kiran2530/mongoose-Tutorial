@@ -30,19 +30,63 @@ const Playlist = new mongoose.model("Playlist",playlistSchema);
 // create a document or insert a document
 const createDocument = async () => {
     try {
-        const reactPlaylist = new Playlist({
-            name : "Node JS",
-            ctype : "Back End",
-            videos : 50,
+        // ..................insert single document in collection.............
+        // const reactPlaylist = new Playlist({
+        //     name : "Express JS",
+        //     ctype : "Back End",
+        //     videos : 30,
+        //     active : true
+        // });
+
+        // const result = await reactPlaylist.save();
+        // console.log(result);
+
+        // ..................insert many documents in collection............. 
+        const jsPlaylist = new Playlist({
+            name : "JS",
+            ctype : "Front End",
+            videos : 40,
             active : true
         });
-        
-        const result = await reactPlaylist.save();
+        const mongoPlaylist = new Playlist({
+            name : "mongoDB",
+            ctype : "Database",
+            videos : 30,
+            active : true
+        });
+        const mongoosePlaylist = new Playlist({
+            name : "mongoose",
+            ctype : "Database",
+            videos : 30,
+            active : true
+        });
+
+        const result = await Playlist.insertMany([jsPlaylist, mongoPlaylist, mongoosePlaylist]);
         console.log(result);
+        
     } catch(err) {
         console.log(err);
     }
     
 }
+// createDocument();
 
-createDocument();
+// ..................Display all documents of collection............. 
+const getDocuments = async () => {
+    // syntax : Collection_name.find() 
+    const result = await Playlist.find();
+    console.log(result);
+}
+
+// getDocuments();
+
+// ..................delete spacific documents in collection............. 
+const deleteDocuments = async () => {
+    // syntax : Collection_name.deleteMany(filter) 
+    const result = await Playlist.deleteMany({
+        name : "mongoDB"
+    })
+    console.log(result);
+}
+
+deleteDocuments();
