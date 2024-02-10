@@ -1,3 +1,6 @@
+//             Mongoose and mongoDB tutorial with node and express js by thapatechnical.
+// -------------------------------------------------------------------------------------------------
+
 const mongoose = require('mongoose');
 
 // connection creation or new database create 
@@ -77,7 +80,6 @@ const getDocuments = async () => {
     const result = await Playlist.find();
     console.log(result);
 }
-
 // getDocuments();
 
 // ..................delete spacific documents in collection............. 
