@@ -77,17 +77,58 @@ const createDocument = async () => {
 // ..................Display all documents of collection............. 
 const getDocuments = async () => {
     // syntax : Collection_name.find() 
-    const result = await Playlist.find();
+    const result = await Playlist.find({videos : {$gte : 50}});
     console.log(result);
 }
 // getDocuments();
 
+// ---------------------- update the mongodb documents using mongoose --------------------
+
+
+const updateDocument = async () => {
+    try {
+        // updateOne() : Return object which show the count of modify documents.
+    // const result = await Playlist.updateOne({
+    //     _id : "65c660f7789f4c1fa94ad666"},   
+    //     {$set : {
+    //             name : "Javascript"
+    //         }
+    //     });                      
+
+    // findByIdAndUpdate() : Return object which show the count of modify documents.
+    const result = await Playlist.findByIdAndUpdate({
+        _id : "65c660f7789f4c1fa94ad666"}, 
+        {$set : {
+                name : "Javascript"
+            }
+        },
+        {new : true});
+
+        console.log(result);
+    } catch(err) {
+        console.log(err);
+    }
+}
+// updateDocument();
+
 // ..................delete spacific documents in collection............. 
 const deleteDocuments = async () => {
+    // syntax : Collection_name.deleteOne(filter) 
+    // const result = await Playlist.deleteOne({
+    //     name : "mongoDB"
+    // })
+
     // syntax : Collection_name.deleteMany(filter) 
-    const result = await Playlist.deleteMany({
-        name : "mongoDB"
-    })
+    // const result = await Playlist.deleteMany({
+    //     name : "mongoDB"
+    // })
+
+    // Above methods return count and ack of how many documents are deleted. 
+
+    // Henced findByIdAndDelete() : Return the document which is deleted .
+
+    const result = await Playlist.findByIdAndDelete({_id : "65c660f7789f4c1fa94ad666"})
+
     console.log(result);
 }
 
