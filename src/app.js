@@ -1,6 +1,7 @@
 //             Mongoose and mongoDB tutorial with node and express js by thapatechnical.
 // -------------------------------------------------------------------------------------------------
 
+// Require the mongoose model.
 const mongoose = require('mongoose');
 
 // connection creation or new database create 
