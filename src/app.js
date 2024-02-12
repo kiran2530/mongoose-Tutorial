@@ -15,8 +15,20 @@ mongoose.connect("mongodb://localhost:27017/myDatabase")
 // to create Schema Use mongoose.schema({})
 const playlistSchema = new mongoose.Schema({
     name : String,
-    ctype : String,
-    videos : Number,
+    // built in validation...
+    ctype : {
+        type : String,
+        lowercase : true,
+        enum : ["database", "frontend", "backend"]
+    },
+    videos : {
+        type : Number,
+        // User defined validator...
+        validate(value) {
+            if(value < 0)
+                throw new Error("Playlist videos not be less than 0");
+        }
+    },
     active : Boolean,
     date :  {
         type:Date,
@@ -45,26 +57,27 @@ const createDocument = async () => {
         // console.log(result);
 
         // ..................insert many documents in collection............. 
-        const jsPlaylist = new Playlist({
-            name : "JS",
-            ctype : "Front End",
-            videos : 40,
-            active : true
-        });
-        const mongoPlaylist = new Playlist({
-            name : "mongoDB",
-            ctype : "Database",
-            videos : 30,
-            active : true
-        });
+        // const jsPlaylist = new Playlist({
+        //     name : "JS",
+        //     ctype : "Front End",
+        //     videos : 40,
+        //     active : true
+        // });
+        // const mongoPlaylist = new Playlist({
+        //     name : "mongoDB",
+        //     ctype : "Database",
+        //     videos : 30,
+        //     active : true
+        // });
+
         const mongoosePlaylist = new Playlist({
-            name : "mongoose",
-            ctype : "Database",
-            videos : 30,
+            name : "Mongoose js",
+            ctype : "DatAbase",
+            videos : 25,
             active : true
         });
 
-        const result = await Playlist.insertMany([jsPlaylist, mongoPlaylist, mongoosePlaylist]);
+        const result = await Playlist.insertMany([mongoosePlaylist]);
         console.log(result);
         
     } catch(err) {
@@ -72,7 +85,7 @@ const createDocument = async () => {
     }
     
 }
-// createDocument();
+createDocument();
 
 // ..................Display all documents of collection............. 
 const getDocuments = async () => {
@@ -132,4 +145,4 @@ const deleteDocuments = async () => {
     console.log(result);
 }
 
-deleteDocuments();
+// deleteDocuments();
