@@ -86,7 +86,7 @@ const createDocument = async () => {
     }
     
 }
-createDocument();
+// createDocument();
 
 // ..................Display all documents of collection............. 
 const getDocuments = async () => {
@@ -146,4 +146,4 @@ const deleteDocuments = async () => {
     console.log(result);
 }
 
-// deleteDocuments();
+deleteDocuments();
