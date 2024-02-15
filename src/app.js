@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 // connection creation or new database create 
 mongoose.connect("mongodb://localhost:27017/myDatabase")
 .then(() => {
-    console.log("connection successfull...");
+    console.log("connection successfull with database...");
 })
 .catch((err) => {
     console.log(err);
@@ -133,15 +133,15 @@ const deleteDocuments = async () => {
     // })
 
     // syntax : Collection_name.deleteMany(filter) 
-    // const result = await Playlist.deleteMany({
-    //     name : "mongoDB"
-    // })
+    const result = await Playlist.deleteMany({
+        name : "mongoDB"
+    })
 
     // Above methods return count and ack of how many documents are deleted. 
 
     // Henced findByIdAndDelete() : Return the document which is deleted .
 
-    const result = await Playlist.findByIdAndDelete({_id : "65c660f7789f4c1fa94ad666"})
+    // const result = await Playlist.findByIdAndDelete({_id : "65c660f7789f4c1fa94ad666"})
 
     console.log(result);
 }
